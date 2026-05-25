@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raman Srivastava — Senior DevOps & Cloud Engineer</title>
+<meta name="description" content="Senior DevOps & Cloud Engineer. Azure AKS, AWS EKS, Terraform, GitOps. AZ-400 & AWS Certified. 5+ years building infrastructure that holds up.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #040712;
+    --surface: #0a0e1a;
+    --card: #0f1522;
+    --accent: #00d4ff;
+    --accent2: #a78bfa;
+    --green: #10b981;
+    --text: #eef5ff;
+    --muted: #7a8aa0;
+    --border: rgba(255,255,255,0.06);
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  ::selection { background: rgba(0,212,255,0.2); }
+
+  /* grid bg */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
+    background-size: 64px 64px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* nav */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(4,7,18,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 12px; font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* layout */
+  section { position: relative; z-index: 1; }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+
+  /* hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 0 4rem;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    padding: 5px 12px;
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 100px;
+  }
+  .hero-tag::before {
+    content: ''; width: 5px; height: 5px;
+    background: var(--accent); border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 540px;
+    margin: 1.5rem 0 2rem;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: var(--font-mono);
+    margin-top: 4px;
+  }
+  .badge-row {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 2.5rem;
+  }
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,212,255,0.15);
+    color: var(--accent);
+    background: rgba(0,212,255,0.04);
+    letter-spacing: 0.03em;
+  }
+  .badge.green { color: var(--green); border-color: rgba(16,185,129,0.2); background: rgba(16,185,129,0.04); }
+  .badge.purple { color: var(--accent2); border-color: rgba(124,58,237,0.2); background: rgba(124,58,237,0.04); }
+  .hero-links {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #040712;
+  }
+  .btn-primary:hover { background: #33ddff; transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+  /* hero glow */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* section styles */
+  .section {
+    padding: 5rem 0;
+  }
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* experience */
+  .exp-item {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: border-color 0.2s;
+  }
+  .exp-item:hover { border-color: rgba(0,212,255,0.15); }
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+  .exp-company {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .exp-company span { color: var(--accent); }
+  .exp-period {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    padding: 3px 10px;
+    border: 1px solid rgba(0,212,255,0.15);
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .exp-role {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+  .exp-details {
+    display: grid;
+    gap: 6px;
+  }
+  .exp-detail {
+    display: flex;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .exp-detail::before {
+    content: '▸';
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .exp-detail strong { color: var(--text); font-weight: 500; }
+  .exp-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+  .exp-tech span {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: rgba(0,212,255,0.06);
+    color: var(--accent);
+    border: 1px solid rgba(0,212,255,0.1);
+    letter-spacing: 0.02em;
+  }
+
+  /* projects */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .proj-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .proj-card:hover { border-color: rgba(0,212,255,0.2); transform: translateY(-2px); }
+  .proj-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+  }
+  .proj-icon { font-size: 22px; line-height: 1; }
+  .proj-arrow {
+    color: var(--muted);
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .proj-card:hover .proj-arrow { color: var(--accent); }
+  .proj-name {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .proj-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+    flex: 1;
+    margin-bottom: 0.75rem;
+  }
+  .proj-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .proj-tech span {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: rgba(0,212,255,0.06);
+    color: var(--accent);
+    border: 1px solid rgba(0,212,255,0.1);
+  }
+
+  /* skills */
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    transition: border-color 0.2s;
+  }
+  .skill-card:hover { border-color: rgba(0,212,255,0.15); }
+  .skill-card h3 {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .skill-tags span {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* certs */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+  }
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+  .cert-icon {
+    width: 36px; height: 36px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .cert-name { font-size: 12px; font-weight: 500; line-height: 1.3; }
+  .cert-issuer { font-family: var(--font-mono); font-size: 9px; color: var(--muted); margin-top: 1px; }
+
+  /* contact */
+  .contact-area {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .contact-headline {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .contact-headline span { color: var(--accent); }
+  .contact-sub {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0.75rem 0 1.5rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: rgba(0,212,255,0.2); color: var(--accent); }
+  .contact-link-icon { font-size: 16px; }
+  .contact-link-value { font-size: 13px; font-weight: 500; }
+
+  /* footer */
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  /* anim */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* mobile */
+  @media (max-width: 720px) {
+    nav { padding: 0.75rem 1.25rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 0 3rem; }
+    .container { padding: 0 1.25rem; }
+    .section { padding: 3.5rem 0; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .exp-header { flex-direction: column; gap: 0.4rem; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">RS // DevOps Engineer</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section>
+  <div class="hero container">
+    <div>
+      <div class="hero-tag">Available · H1B · US-based</div>
+      <h1>Raman<br><span>Srivastava</span></h1>
+      <p>Senior DevOps & Cloud Engineer. I build infrastructure that holds up — 99.99% uptime, 45% faster deployments, $2M+ cost savings. Enterprise Kubernetes on Azure & AWS.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">99.99%</div>
+          <div class="hero-stat-label">Uptime</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">45%</div>
+          <div class="hero-stat-label">Faster Deployments</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">$2M+</div>
+          <div class="hero-stat-label">Annual Savings</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">150M+</div>
+          <div class="hero-stat-label">Records / Week</div>
+        </div>
+      </div>
+      <div class="badge-row">
+        <span class="badge">Azure AKS</span>
+        <span class="badge">AWS EKS</span>
+        <span class="badge">Terraform</span>
+        <span class="badge">GitOps</span>
+        <span class="badge">ArgoCD</span>
+        <span class="badge green">AZ-400</span>
+        <span class="badge green">AWS SAA</span>
+        <span class="badge purple">5+ Years</span>
+      </div>
+      <div class="hero-links">
+        <a href="mailto:ramans01211@gmail.com" class="btn btn-primary">Email me</a>
+        <a href="https://github.com/raman01211" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/raman-srivastava" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://ramansrivastava.dev" class="btn btn-ghost" target="_blank" rel="noopener">ramansrivastava.dev</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section container">
+    <div class="section-header fade-up">
+      <span class="section-tag">// 01 · Experience</span>
+      <h2 class="section-title">Where I've Built</h2>
+    </div>
+
+    <div class="exp-item fade-up">
+      <div class="exp-header">
+        <div class="exp-company">AssetMark <span>· Senior DevOps / Cloud Engineer</span></div>
+        <span class="exp-period">FEB 2024 — PRESENT</span>
+      </div>
+      <div class="exp-role">$17B wealth management platform · United States</div>
+      <div class="exp-details">
+        <div class="exp-detail"><strong>Architected enterprise AKS platform</strong> using Terraform & GitOps (ArgoCD). Eliminated configuration drift across 15+ engineering teams; reduced cluster provisioning from hours to under 15 minutes with modular Terraform and self-service infrastructure.</div>
+        <div class="exp-detail"><strong>Reduced deployment time by 45%</strong> via multi-stage CI/CD pipelines (GitHub Actions, Azure Pipelines) with progressive delivery — canary, blue-green, and A/B deployments via Argo Rollouts. Achieved 98%+ release success rate across 40+ microservices with automated rollback on failure.</div>
+        <div class="exp-detail"><strong>Cut security vulnerabilities by 40%</strong> embedding Checkmarx (SAST), SonarQube, Veracode (DAST), and OPA/Kyverno (policy-as-code) into CI/CD. Implemented zero-trust Istio mTLS, automated Key Vault secret rotation, and Azure Policy for compliance (SOC 2, PCI-DSS).</div>
+        <div class="exp-detail"><strong>Sustained 99.99% platform uptime</strong> with Dynatrace, Prometheus, Grafana, ELK Stack, and OpenTelemetry. Established SLO/SLI error-budget policies, reduced MTTR by 40%. Built chaos engineering framework (LitmusChaos) for pre-release resilience validation.</div>
+        <div class="exp-detail"><strong>Engineered zero-downtime cluster upgrades</strong> with HPA/KEDA autoscaling, optimized node pools, and taints/tolerations. Reduced monthly compute costs by 18% (~$2M annual savings) through right-sizing, spot instances, and FinOps dashboards.</div>
+        <div class="exp-detail"><strong>Architected enterprise event-driven platform</strong> on AKS using Apache Kafka for real-time data streaming. Tuned Kafka clusters (partition optimization, consumer group autoscaling) achieving 35% throughput increase and 20% latency reduction.</div>
+        <div class="exp-detail"><strong>Automated PostgreSQL provisioning, schema migrations (Alembic), backup validation, and failover testing</strong> via Terraform. Built Python/Shell automation for drift detection, cost analysis, and resource cleanup, saving 6+ engineering hours weekly.</div>
+        <div class="exp-detail"><strong>Delivered AI-powered exception analysis platform (RemediAI)</strong> — LangGraph AI agents, Azure Service Bus, PostgreSQL, FastAPI, React dashboard. Reduced .NET exception debugging time via intelligent stack trace analysis with LLM-based remediation suggestions.</div>
+      </div>
+      <div class="exp-tech">
+        <span>Azure AKS</span><span>Terraform</span><span>ArgoCD</span><span>Istio</span><span>Kafka</span><span>Prometheus</span><span>Grafana</span><span>Azure DevOps</span><span>GitHub Actions</span><span>Python</span><span>PostgreSQL</span><span>Dynatrace</span><span>Checkmarx</span><span>KEDA</span><span>LangGraph</span>
+      </div>
+    </div>
+
+    <div class="exp-item fade-up">
+      <div class="exp-header">
+        <div class="exp-company">Genpact <span>· DevOps / Cloud Engineer</span></div>
+        <span class="exp-period">FEB 2019 — JAN 2022</span>
+      </div>
+      <div class="exp-role">Pharmaceutical enterprise · India</div>
+      <div class="exp-details">
+        <div class="exp-detail"><strong>Led full legacy-to-AWS cloud migration</strong> of pharmaceutical data platform — migrated 50+ applications using Amazon EMR, AWS Glue, Redshift, S3, and VPC. Reduced operational costs by 40% while scaling to 150M+ records/week at 98% data accuracy.</div>
+        <div class="exp-detail"><strong>Architected containerized big data platform</strong> on Amazon EKS with auto-scaling, multi-AZ HA, and disaster recovery for pharmaceutical analytics. Designed scalable ingestion pipelines from 80+ data sources processing 100+ TB into S3 data lake and Redshift warehouse.</div>
+        <div class="exp-detail"><strong>Built 80+ automated data quality checks</strong> using Python, AWS Lambda, and AWS Glue — null detection, sign validation, schema validation, outlier detection. Prevented $2M+ in quarterly losses from bad incentive payouts.</div>
+        <div class="exp-detail"><strong>Implemented end-to-end CI/CD pipelines</strong> with GitLab CI, GitHub Actions, and Jenkins for automated build/test/deploy of data workflows. Cut release cycles by 40%, increased deployment frequency 3x across teams.</div>
+        <div class="exp-detail"><strong>Enhanced pipeline observability</strong> with CloudWatch dashboards, SNS alerting, custom log aggregation, and Glue job metrics. Automated SSIS-based ETL workloads using SQL Agent, Jenkins, and containerized execution on EC2/ECS, improving team productivity by 15%.</div>
+        <div class="exp-detail"><strong>Led L2/L3 on-call production support</strong> for AWS workloads: incident logging, root cause analysis, hot-fix coordination, and SLA-driven recovery for pharmaceutical analytics serving 15+ business teams.</div>
+      </div>
+      <div class="exp-tech">
+        <span>AWS EKS</span><span>AWS Glue</span><span>EMR</span><span>Redshift</span><span>S3</span><span>Terraform</span><span>GitLab CI</span><span>Jenkins</span><span>Python</span><span>Apache Spark</span><span>CloudWatch</span><span>Lambda</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section container">
+    <div class="section-header fade-up">
+      <span class="section-tag">// 02 · Projects</span>
+      <h2 class="section-title">Open Source & Side Projects</h2>
+    </div>
+    <div class="proj-grid">
+      <a href="https://github.com/raman01211/aks-enterprise-platform" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">☸</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">AKS Enterprise Platform</div>
+        <div class="proj-desc">Production-grade multi-tenant AKS with Terraform modules, ArgoCD GitOps, Istio service mesh, Azure Policy, and full observability stack.</div>
+        <div class="proj-tech"><span>Terraform</span><span>AKS</span><span>ArgoCD</span><span>Istio</span><span>Prometheus</span></div>
+      </a>
+      <a href="https://github.com/raman01211/remediai" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">🤖</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">RemediAI</div>
+        <div class="proj-desc">AI-powered .NET exception analysis platform using LangGraph agents, Azure Service Bus, PostgreSQL on AKS. LLM-based stack trace remediation.</div>
+        <div class="proj-tech"><span>Python</span><span>LangGraph</span><span>Azure</span><span>AKS</span><span>FastAPI</span></div>
+      </a>
+      <a href="https://github.com/raman01211/Real-Time-Stock-Market-Data-ETL" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">📊</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">Real-Time Stock Market ETL</div>
+        <div class="proj-desc">Streaming data pipeline: Kafka ingestion, AWS Glue transformation, S3/Athena querying, Power BI visualization. Full real-time data engineering stack.</div>
+        <div class="proj-tech"><span>Kafka</span><span>AWS Glue</span><span>Athena</span><span>Power BI</span><span>Terraform</span></div>
+      </a>
+      <a href="https://github.com/raman01211/three-tier-architecture-demo" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">🏛</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">Three-Tier Architecture on EKS</div>
+        <div class="proj-desc">12 microservice three-tier deployment on AWS EKS demonstrating web, API, and database layer separation with Terraform IaC.</div>
+        <div class="proj-tech"><span>AWS EKS</span><span>Terraform</span><span>Kubernetes</span><span>Docker</span></div>
+      </a>
+      <a href="https://github.com/raman01211/terraform" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">🏗</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">Terraform Modules</div>
+        <div class="proj-desc">Reusable multi-cloud Terraform modules: VPC/VNet, AKS/EKS clusters, databases, monitoring, security baselines. Production tested.</div>
+        <div class="proj-tech"><span>Terraform</span><span>Azure</span><span>AWS</span><span>Helm</span></div>
+      </a>
+      <a href="https://github.com/raman01211/progressive-delivery-pipeline" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">🚀</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">Progressive Delivery Pipeline</div>
+        <div class="proj-desc">Canary, blue-green, and A/B deployments with Argo Rollouts, Istio traffic shifting, Prometheus analysis, and automated rollback.</div>
+        <div class="proj-tech"><span>Argo Rollouts</span><span>Istio</span><span>Prometheus</span><span>ArgoCD</span></div>
+      </a>
+      <a href="https://github.com/raman01211/sre-observability-platform" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">📈</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">SRE Observability Platform</div>
+        <div class="proj-desc">Full-stack observability: Prometheus/Grafana, ELK, OpenTelemetry, Dynatrace with SLO-driven alerting and PagerDuty integration.</div>
+        <div class="proj-tech"><span>Prometheus</span><span>Grafana</span><span>ELK</span><span>OpenTelemetry</span><span>Dynatrace</span></div>
+      </a>
+      <a href="https://github.com/raman01211/Real-Estate-Price-Prediction-with-Machine-Learning" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">🏠</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">ML Price Prediction</div>
+        <div class="proj-desc">End-to-end ML pipeline on AWS: data preprocessing, feature engineering, scikit-learn modeling, and visualization dashboards.</div>
+        <div class="proj-tech"><span>Python</span><span>Spark</span><span>scikit-learn</span><span>AWS S3</span></div>
+      </a>
+      <a href="https://github.com/raman01211/chaos-engineering-kubernetes" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">🔥</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">Chaos Engineering</div>
+        <div class="proj-desc">LitmusChaos experiments for pod, network, node, and DNS failure injection on AKS/EKS with resilience scoring.</div>
+        <div class="proj-tech"><span>LitmusChaos</span><span>AKS</span><span>Prometheus</span><span>Grafana</span></div>
+      </a>
+      <a href="https://github.com/raman01211/Sonarcube-jenkins" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">🔒</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">SonarQube + Jenkins DevSecOps</div>
+        <div class="proj-desc">Integrated SAST pipeline with SonarQube, Jenkins, and automated quality gates for continuous code security scanning.</div>
+        <div class="proj-tech"><span>Jenkins</span><span>SonarQube</span><span>Checkmarx</span><span>Docker</span></div>
+      </a>
+      <a href="https://github.com/raman01211/stock-market-kafka" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">⚡</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">Stock Market Kafka Streaming</div>
+        <div class="proj-desc">Apache Kafka real-time streaming pipeline with producers, consumers, stream processing, and storage integration.</div>
+        <div class="proj-tech"><span>Kafka</span><span>Python</span><span>Stream Processing</span></div>
+      </a>
+      <a href="https://github.com/raman01211/Voice" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">🎤</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">Text to Voice</div>
+        <div class="proj-desc">Python text-to-speech application with multiple voice engines and output format support for accessibility use cases.</div>
+        <div class="proj-tech"><span>Python</span><span>TTS</span><span>CLI</span></div>
+      </a>
+      <a href="https://github.com/raman01211/server-survival" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">🎮</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">Server Survival</div>
+        <div class="proj-desc">Cloud architecture tower defense game. Defend servers from cyber threats — cloud gamification project.</div>
+        <div class="proj-tech"><span>JavaScript</span><span>HTML5</span><span>Cloud Concepts</span></div>
+      </a>
+      <a href="https://github.com/raman01211/Resume-Maker" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">📄</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">Resume Maker</div>
+        <div class="proj-desc">Web-based resume builder with customizable templates, export to PDF, and ATS-optimized formatting engine.</div>
+        <div class="proj-tech"><span>JavaScript</span><span>HTML/CSS</span><span>PDF</span></div>
+      </a>
+      <a href="https://github.com/raman01211/raman01211.github.io" class="proj-card fade-up" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-icon">🌐</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">Portfolio Site</div>
+        <div class="proj-desc">Personal portfolio and resume site hosted on GitHub Pages. Dark-themed, responsive, with ATS resume downloads.</div>
+        <div class="proj-tech"><span>HTML/CSS</span><span>JS</span><span>GitHub Pages</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section container">
+    <div class="section-header fade-up">
+      <span class="section-tag">// 03 · Skills</span>
+      <h2 class="section-title">Technologies I Work With</h2>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card fade-up"><h3>☁️ Cloud Platforms</h3>
+        <div class="skill-tags"><span>Azure AKS</span><span>AWS EKS</span><span>GCP GKE</span><span>Azure DevOps</span><span>Azure Monitor</span><span>AWS Lambda</span><span>Redshift</span><span>Key Vault</span><span>APIM</span><span>Cosmos DB</span><span>CloudFront</span></div>
+      </div>
+      <div class="skill-card fade-up"><h3>⚙️ Infrastructure as Code</h3>
+        <div class="skill-tags"><span>Terraform</span><span>Helm</span><span>ArgoCD</span><span>Ansible</span><span>ARM Templates</span><span>Bicep</span><span>CloudFormation</span><span>Kustomize</span><span>Terragrunt</span></div>
+      </div>
+      <div class="skill-card fade-up"><h3>🚀 CI/CD & GitOps</h3>
+        <div class="skill-tags"><span>GitHub Actions</span><span>GitLab CI</span><span>Jenkins</span><span>Azure Pipelines</span><span>Argo Rollouts</span><span>Flux</span><span>Canary</span><span>Blue-Green</span><span>Spinnaker</span></div>
+      </div>
+      <div class="skill-card fade-up"><h3>🔒 DevSecOps</h3>
+        <div class="skill-tags"><span>Checkmarx</span><span>SonarQube</span><span>Veracode</span><span>Snyk</span><span>Trivy</span><span>OPA</span><span>Kyverno</span><span>Istio mTLS</span><span>Zero Trust</span><span>Azure Policy</span><span>SOC 2</span></div>
+      </div>
+      <div class="skill-card fade-up"><h3>📊 Observability & SRE</h3>
+        <div class="skill-tags"><span>Prometheus</span><span>Grafana</span><span>Dynatrace</span><span>ELK Stack</span><span>OpenTelemetry</span><span>Jaeger</span><span>Tempo</span><span>CloudWatch</span><span>PagerDuty</span><span>SLO/SLI</span><span>Chaos Engineering</span></div>
+      </div>
+      <div class="skill-card fade-up"><h3>🗄️ Data & Streaming</h3>
+        <div class="skill-tags"><span>Apache Kafka</span><span>Databricks</span><span>PySpark</span><span>AWS Glue</span><span>EMR</span><span>Airflow</span><span>Kinesis</span><span>Athena</span><span>Redshift</span></div>
+      </div>
+      <div class="skill-card fade-up"><h3>💻 Languages</h3>
+        <div class="skill-tags"><span>Python</span><span>Bash</span><span>PowerShell</span><span>Go</span><span>SQL</span><span>YAML</span><span>HCL</span></div>
+      </div>
+      <div class="skill-card fade-up"><h3>🗃️ Databases</h3>
+        <div class="skill-tags"><span>PostgreSQL</span><span>Redis</span><span>Cosmos DB</span><span>DynamoDB</span><span>RDS</span><span>Azure SQL</span><span>Elasticsearch</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="section container">
+    <div class="section-header fade-up">
+      <span class="section-tag">// 04 · Certifications</span>
+      <h2 class="section-title">Verified Credentials</h2>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-item fade-up">
+        <div class="cert-icon" style="background:rgba(0,120,212,0.1);">🔷</div>
+        <div><div class="cert-name">DevOps Engineer Expert</div><div class="cert-issuer">Microsoft AZ-400 · Exp Apr 2027</div></div>
+      </div>
+      <div class="cert-item fade-up">
+        <div class="cert-icon" style="background:rgba(0,120,212,0.1);">🔷</div>
+        <div><div class="cert-name">Azure Developer Associate</div><div class="cert-issuer">Microsoft AZ-204</div></div>
+      </div>
+      <div class="cert-item fade-up">
+        <div class="cert-icon" style="background:rgba(255,153,0,0.1);">🟠</div>
+        <div><div class="cert-name">Solutions Architect Associate</div><div class="cert-issuer">AWS SAA · Exp Apr 2027</div></div>
+      </div>
+      <div class="cert-item fade-up">
+        <div class="cert-icon" style="background:rgba(255,51,51,0.1);">🔴</div>
+        <div><div class="cert-name">Lakehouse Fundamentals</div><div class="cert-issuer">Databricks</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-area">
+  <div class="section container">
+    <div class="contact-inner">
+      <div class="fade-up">
+        <h2 class="contact-headline">Let's build<br>something <span>reliable.</span></h2>
+        <p class="contact-sub">Open to Senior DevOps, SRE, Cloud, and Platform Engineering roles. H1B transfer welcome.</p>
+        <a href="mailto:ramans01211@gmail.com" class="btn btn-primary">Send a message →</a>
+      </div>
+      <div class="contact-links fade-up">
+        <a href="mailto:ramans01211@gmail.com" class="contact-link">
+          <span class="contact-link-icon">✉</span>
+          <div><div class="contact-link-value">ramans01211@gmail.com</div></div>
+        </a>
+        <a href="tel:+17039893343" class="contact-link">
+          <span class="contact-link-icon">📞</span>
+          <div><div class="contact-link-value">+1 (703) 989-3343</div></div>
+        </a>
+        <a href="https://linkedin.com/in/raman-srivastava" class="contact-link" target="_blank" rel="noopener">
+          <span class="contact-link-icon">💼</span>
+          <div><div class="contact-link-value">linkedin.com/in/raman-srivastava</div></div>
+        </a>
+        <a href="https://github.com/raman01211" class="contact-link" target="_blank" rel="noopener">
+          <span class="contact-link-icon">⌨</span>
+          <div><div class="contact-link-value">github.com/raman01211</div></div>
+        </a>
+        <a href="https://ramansrivastava.dev" class="contact-link" target="_blank" rel="noopener">
+          <span class="contact-link-icon">🌐</span>
+          <div><div class="contact-link-value">ramansrivastava.dev</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  RAMAN SRIVASTAVA · SENIOR DEVOPS & CLOUD ENGINEER · 2026
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
